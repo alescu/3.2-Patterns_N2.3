@@ -12,11 +12,18 @@ public class Main {
      */
     public static void main(String[] args){
 
-        Payment payment_1 = new Payment(Payment.PaymentMethod.ACCOUNT_DEBIT);
+        Payment payment_1 = new Payment("The Most Biggest Shoes Shop", 22.9, Payment.PaymentMethod.ACCOUNT_DEBIT);
 
+        System.out.println("\nSend payment number 1");
+        System.out.println("                    ... awaiting response");
         PaymentGateway paymentGateway = new PaymentGateway(payment_1);
+        paymentGateway.run();
 
-        paymentGateway.startProcess();
+        System.out.println("\nSend payment number 2");
+        System.out.println("                    ... awaiting response");
+        Payment payment_2 = new Payment("The Most Biggest Shoes Shop 2", 15.25, Payment.PaymentMethod.ACCOUNT_DEBIT);
+        paymentGateway = new PaymentGateway(payment_2);
+        paymentGateway.run();
 
     }
 

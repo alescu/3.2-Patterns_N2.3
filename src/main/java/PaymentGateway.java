@@ -1,5 +1,6 @@
-public class PaymentGateway {
+public class PaymentGateway implements Runnable {
 
+    // private static final Object lock = new Object();
     private Callback  callback;
     private Payment  userPayment;
 
@@ -8,17 +9,21 @@ public class PaymentGateway {
         this.callback = new CallbackBox();
     }
 
-    public void startProcess(){
-        new Thread(() -> {
+    @Override
+    public void run() {
+        // synchronized () {
             try {
-                Thread.sleep(2000);
-                if (callback != null) {
-                    System.out.println("\n..." + 2000 + " millis after.....");
-                    callback.taskCompleted();
-                }
+                Thread.sleep(3000); // Dormir 1 segon (1000 milisegons)
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                // Gestionar la interrupció (opcional)
+                System.out.println("Fil interromput: " + e.getMessage());
+                // Si volem que el fil acabi al ser interromput, podem fer un return;
+                // return;
             }
-        }).start();
+            if (callback != null) {
+                // System.out.println("\n..."+ userPayment.getClass() + 2000 + " millis after.....");
+                callback.taskCompleted(this.userPayment);
+            }
+        // }
     }
 }

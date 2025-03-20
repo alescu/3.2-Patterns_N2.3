@@ -1,3 +1,3 @@
 public interface Callback {
-    void taskCompleted();
+    void taskCompleted(Payment  userPayment);
 }
